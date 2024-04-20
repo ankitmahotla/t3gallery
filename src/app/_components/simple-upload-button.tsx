@@ -60,6 +60,10 @@ export function SimpleUploadButton() {
                 id: "upload-begin"
             })
         },
+        onUploadError() {
+            toast.dismiss("upload-begin")
+            toast.error("Failed to upload due to rate limiting")
+        },
         onClientUploadComplete() {
             toast.dismiss("upload-begin")
             toast("Upload Complete!")
