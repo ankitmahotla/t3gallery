@@ -4,15 +4,21 @@ import { Images } from "./_components/images";
 
 export const dynamic = "force-dynamic"
 
-export default async function HomePage() {
+async function LoggedIn() {
   const images = await getMyImages();
+  return (
+    <Images images={images} />
+  )
+}
+
+export default async function HomePage() {
   return (
     <main>
       <SignedOut>
         <div className="h-full w-full text-2xl text-center">Please sign in </div>
       </SignedOut>
       <SignedIn>
-        <Images images={images} />
+        <LoggedIn />
       </SignedIn>
     </main>
   );
