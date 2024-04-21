@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
+import { Checkbox } from "~/components/ui/checkbox";
 import useImageStore from "~/context/store";
 import type { ImageData, Props } from "~/types";
 
@@ -19,7 +20,7 @@ export function Images({ images }: Props) {
 
     return (
         <div className="flex flex-col justify-center items-center">
-            <div className="my-5 text-xl">Selected Images: {selectedImages.length}</div>
+            {selectedImages.length > 0 && <div className="my-5 text-xl">Selected Images: {selectedImages.length}</div>}
             <div className="flex flex-wrap items-end justify-center gap-4 p-4">
                 {images.map((image) => (
                     <div key={image.id} className="flex w-48 flex-col">
@@ -31,10 +32,12 @@ export function Images({ images }: Props) {
                                 height={192}
                                 className="max-h-48"
                                 alt={image.name}
-                                onClick={() => handleImageClick(image)}
                             />
                         </Link>
-                        <div className="text-center mt-2">{image.name.slice(0, 10)}</div>
+                        <div className="flex justify-between items-center mt-2 p-1">
+                            {image.name.slice(0, 10)}
+                            <Checkbox onClick={() => handleImageClick(image)} />
+                        </div>
                     </div>
                 ))}
             </div>
