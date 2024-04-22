@@ -5,6 +5,7 @@ interface ImageStoreState {
   selectedImages: ImageData[];
   addSelectedImage: (image: ImageData) => void;
   removeSelectedImage: (id: number) => void;
+  cancelImageSelection: () => void;
 }
 
 const useImageStore = create<ImageStoreState>((set) => ({
@@ -15,6 +16,9 @@ const useImageStore = create<ImageStoreState>((set) => ({
     set((state) => ({
       selectedImages: state.selectedImages.filter((image) => image.id !== id),
     })),
+  cancelImageSelection: () => {
+    set(() => ({selectedImages: []}))
+  }
 }));
 
 export default useImageStore;
